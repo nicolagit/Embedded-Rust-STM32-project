@@ -6,7 +6,7 @@ use core::panic::PanicInfo;
 
 #[unsafe(no_mangle)]
 
-fn main() {
+fn main() -> ! {
     loop {}
 }
 
