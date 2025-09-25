@@ -1,9 +1,125 @@
 // 1. Define the vector table for the mcu
-static VECTOR_TABLE: [Option<unsafe fn()>; 96] = [Some(reset_handler), Some(nmi_handler)];
+static VECTOR_TABLE: [Option<unsafe fn()>; 96] = [
+    Some(Reset_Handler),
+    Some(NMI_Handler),
+    Some(HardFault_Handler),
+    Some(MemManage_Handler),
+    Some(BusFault_Handler),
+    Some(UsageFault_Handler),
+    None,
+    None,
+    None,
+    None,
+    Some(SVCall_Handler),
+    None,
+    None,
+    Some(PendSV_Handler),
+    Some(SysTick_Handler),
+    Some(WWDG_Handler),
+    Some(PVD_Handler),
+    Some(TAMP_STAMP_Handler),
+    Some(RTC_WKUP_Handler),
+    Some(FLASH_Handler),
+    Some(RCC_Handler),
+    Some(EXTI0_Handler),
+    Some(EXTI1_Handler),
+    Some(EXTI2_TSC_Handler),
+    Some(EXTI3_Handler),
+    Some(EXTI4_Handler),
+    Some(DMA1_CH1_Handler),
+    Some(DMA1_CH2_Handler),
+    Some(DMA1_CH3_Handler),
+    Some(DMA1_CH4_Handler),
+    Some(DMA1_CH5_Handler),
+    Some(DMA1_CH6_Handler),
+    Some(DMA1_CH7_Handler),
+    Some(ADC1_2_Handler),
+    Some(USB_HP_CAN_TX_Handler),
+    Some(USB_LP_CAN_RX0_Handler),
+    Some(CAN_RX1_Handler),
+    Some(CAN_SCE_Handler),
+    Some(EXTI9_5_Handler),
+    Some(TIM1_BRK_TIM15_Handler),
+    Some(TIM1_UP_TIM16_Handler),
+    Some(TIM1_TRG_COM_TIM17_Handler),
+    Some(TIM1_CC_Handler),
+    Some(TIM2_Handler),
+    None, //Some(TIM3_Handler),
+    //Some(TIM4_Handler),
+    Some(I2C1_EV_EXTI23_Handler),
+    Some(I2C1_ER_Handler),
+    None, //Some(I2C2_EV_EXTI24_Handler),
+    None, //Some(I2C2_ER_Handler),
+    Some(SPI1_Handler),
+    None, //Some(SPI2_Handler),
+    Some(USART1_EXTI25_Handler),
+    Some(USART2_EXTI26_Handler),
+    Some(USART3_EXTI28_Handler),
+    Some(EXTI15_10_Handler),
+    Some(RTCAlarm_Handler),
+    None, //Some(USB_WKUP_Handler),
+    None, //Some(TIM8_BRK_Handler),
+    None, //Some(TIM8_UP_Handler),
+    None, //Some(TIM8_TRG_COM_Handler),
+    None, //Some(TIM8_CC_Handler),
+    None, //Some(ADC3_Handler),
+    None, //Some(FMC_Handler),
+    None,
+    None,
+    None, //Some(SPI3_Handler),
+    None, //Some(UART4_EXTI34_Handler),
+    None, //Some(UART5_EXTI35_Handler),
+    Some(TIM6_DACUNDER_Handler),
+    Some(TIM7_Handler),
+    None, //Some(DMA2_CH1_Handler),
+    None, //Some(DMA2_CH2_Handler),
+    None, //Some(DMA2_CH3_Handler),
+    None, //Some(DMA2_CH4_Handler),
+    None, //Some(DMA2_CH5_Handler),
+    None, //Some(ADC4_Handler),
+    None,
+    None,
+    Some(COMP123_Handler),
+    Some(COMP456_Handler),
+    None, //Some(COMP7_Handler),
+    None,
+    None,
+    None,
+    None,
+    None,
+    None, //Some(I2C3_EV_Handler),
+    None, //Some(I2C3_ER_Handler),
+    None, //Some(USB_HP_Handler),
+    None, //Some(USB_LP_Handler),
+    None, //Some(USB_WKUP_EXTI_Handler),
+    None, //Some(TIM20_BRK_Handler),
+    None, //Some(TIM20_UP_Handler),
+    None, //Some(TIM20_TRG_COM_Handler),
+    None, //Some(TIM20_CC_Handler),
+    None,
+    //None,
+    //None,
+    FPU_Handler, //Some(SPI4_Handler),
+];
+
+#[no_mangle]
+fn NMI_Handler() {
+    loop {}
+}
+
+#[no_mangle]
+fn HardFault_Handler() {
+    loop {}
+}
+
+#[no_mangle]
+fn default_handler() {
+    loop {}
+}
 
 // 2. Define the reset handler
-#[unsafe(no_mangle)]
-fn reset_handler() -> ! {
+#[no_mangle]
+unsafe fn Reset_Handler() {
     // 1. Copy the .data section from FLASH to RAM
 
     // 2. Zero out the .bss section in the RAM
