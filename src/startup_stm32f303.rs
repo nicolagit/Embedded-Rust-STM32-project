@@ -185,24 +185,24 @@ static VECTOR_TABLE: [Option<unsafe extern "C" fn()>; 96] = [
     Some(FPU_Handler), //Some(SPI4_Handler),
 ];
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 extern "C" fn NMI_Handler() {
     loop {}
 }
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 extern "C" fn HardFault_Handler() {
     loop {}
 }
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 extern "C" fn default_handler() {
     loop {}
 }
 
 // 2. Define the reset handler
-#[no_mangle]
-unsafe fn Reset_Handler() {
+#[unsafe(no_mangle)]
+unsafe extern "C" fn Reset_Handler() {
     // 1. Copy the .data section from FLASH to RAM
 
     // 2. Zero out the .bss section in the RAM
