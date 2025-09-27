@@ -1,5 +1,5 @@
 // 1. Define the vector table for the mcu
-extern "C" {
+unsafe extern "C" {
     fn BusFault_Handler();
     fn MemManage_Handler();
     fn PendSV_Handler();
@@ -180,10 +180,9 @@ static VECTOR_TABLE: [Option<unsafe extern "C" fn()>; 96] = [
     None, //Some(TIM20_UP_Handler),
     None, //Some(TIM20_TRG_COM_Handler),
     None, //Some(TIM20_CC_Handler),
-    None,
     //None,
     //None,
-    FPU_Handler, //Some(SPI4_Handler),
+    Some(FPU_Handler), //Some(SPI4_Handler),
 ];
 
 #[no_mangle]
