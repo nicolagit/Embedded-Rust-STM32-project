@@ -82,6 +82,7 @@ unsafe extern "C" {
     fn FPU_Handler();
 }
 
+#[unsafe(link_section = ".isr_vector")] //#[link_section = ".isr_vector"]
 #[used]
 static VECTOR_TABLE: [Option<unsafe extern "C" fn()>; 96] = [
     Some(Reset_Handler),
@@ -185,23 +186,23 @@ static VECTOR_TABLE: [Option<unsafe extern "C" fn()>; 96] = [
     Some(FPU_Handler), //Some(SPI4_Handler),
 ];
 
-#[unsafe(no_mangle)]
+#[unsafe(no_mangle)] //#[no_mangle]
 extern "C" fn NMI_Handler() {
     loop {}
 }
 
-#[unsafe(no_mangle)]
+#[unsafe(no_mangle)] //#[no_mangle]
 extern "C" fn HardFault_Handler() {
     loop {}
 }
 
-#[unsafe(no_mangle)]
-extern "C" fn default_handler() {
+#[unsafe(no_mangle)] //#[no_mangle]
+extern "C" fn Default_Handler() {
     loop {}
 }
 
 // 2. Define the reset handler
-#[unsafe(no_mangle)]
+#[unsafe(no_mangle)] //#[no_mangle]
 unsafe extern "C" fn Reset_Handler() {
     // 1. Copy the .data section from FLASH to RAM
 
