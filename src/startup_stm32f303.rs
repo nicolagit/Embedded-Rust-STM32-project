@@ -82,6 +82,14 @@ unsafe extern "C" {
     fn FPU_Handler();
 }
 
+unsafe extern "C" {
+    static _sidata: u32; // Start of .data section in flash
+    static _sdata: u32; // Start of .data section in RAM
+    static _edata: u32; // End of .data section in RAM
+    static _sbss: u32; // Start of .bss section in RAM
+    static _ebss: u32; // End of .bss section in RAM
+}
+
 #[unsafe(link_section = ".isr_vector")] //#[link_section = ".isr_vector"]
 #[used]
 static VECTOR_TABLE: [Option<unsafe extern "C" fn()>; 96] = [
@@ -205,6 +213,9 @@ extern "C" fn Default_Handler() {
 #[unsafe(no_mangle)] //#[no_mangle]
 unsafe extern "C" fn Reset_Handler() {
     // 1. Copy the .data section from FLASH to RAM
+
+    // reference of static variable to C like raw pointer.
+    let src_is_flash: = &_sidata as *const u32;
 
     // 2. Zero out the .bss section in the RAM
 
