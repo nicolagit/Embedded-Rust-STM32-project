@@ -5,3 +5,5 @@ target = "thumbv7em-none-eabihf"
 rustflags = [
     "-C", "link-arg=-Tmemory.ld"
 ]
+
+runner = 'probe-rs run --chip STM32F303K8'

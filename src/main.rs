@@ -13,7 +13,7 @@ const _NUMBERS: [i32; 5] = [1, 2, 3, 4, 5]; // Constant array
 static mut BUFFER: [u8; 1024] = [0; 1024]; // Static mutable buffer
 
 #[unsafe(no_mangle)]
-fn main() -> ! {
+pub extern "C" fn main() -> ! {
     let mut _total_score = 0;
 
     unsafe {
